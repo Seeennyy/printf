@@ -1,47 +1,45 @@
 #ifndef MAIN_H
 #define MAIN_H
-
-#include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #define UNUSED(x) (void)(x)
-#define OUTPUT_SIZE 1024
+#define BUFF_SIZE 1024
 
 /* FLAGS */
-#define FLAG_ZERO 4
-#define FLAG_HASH 8
-#define FLAG_MINUS 1
-#define FLAG_PLUS 2
-#define FLAG_SPACE 16
+#define F_MINUS 1
+#define F_PLUS 2
+#define F_ZERO 4
+#define F_HASH 8
+#define F_SPACE 16
 
 /* SIZES */
-#define SIZE_SHORT 1
-#define SIZE_LONG 2
+#define S_LONG 2
+#define S_SHORT 1
 
 /**
- * struct format - Formaat specifierr structuree
+ * struct fmt - Struct op
  *
- * @specifier: The foormat sppecifier.
- * @handler: The asssociated handler function.
+ * @fmt: The format.
+ * @fn: The function associated.
  */
-struct format
+struct fmt
 {
-	char specifier;
-	int (*handler)(va_list, char[], int, int, int, int);
+	char fmt;
+	int (*fn)(va_list, char[], int, int, int, int);
 };
 
+
 /**
- * typedef struct format format_t - Format specifier structure
+ * typedef struct fmt fmt_t - Struct op
  *
- * @specifier: The format specifier.
- * @handler: The associated handler function.
+ * @fmt: The format.
+ * @fm_t: The function associated.
  */
-typedef struct format format_t;
+typedef struct fmt fmt_t;
 
 int _printf(const char *format, ...);
-int handle_print(const char *specifier, int *index,
-	va_list arg_list, char output[], int flags, int width, int precision, int size);
-
-#endif /* MAIN_H */
+int handle_print(const char *fmt, int *m,
+va_list list, char buffer[], int flags, int width, int precision, int size);
 

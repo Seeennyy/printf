@@ -1,67 +1,67 @@
 #include "main.h"
 
-void print_output(char output[], int *output_index);
+void print_buffer(char buffer[], int *buff_ind);
 
 /**
- * _printf - Custom printf function
- * @format_string: Format string.
- * Return: Number of printed characters.
+ * _printf – function of print fffff
+ * @format: mr format u know.
+ * Return: chars I NEED TO print.
  */
-int _printf(const char *format_string, ...)
+int _printf(const char *format, ...)
 {
-	int m, printed_count = 0, total_printed_chars = 0;
-	int flags, width, precision, size, output_index = 0;
-	va_list arg_list;
-	char output[OUTPUT_SIZE];
+	int m, printed = 0, printed_chars = 0;
+	int flags, width, precision, size, buff_ind = 0;
+	va_list list;
+	char buffer[BUFF_SIZE];
 
-	if (format_string == NULL)
+	if (format == NULL)
 		return (-1);
 
-	va_start(arg_list, format_string);
+	va_start(list, format);
 
-	for (m = 0; format_string && format_string[m] != '\0'; m++)
+	for (m = 0; format && format[m] != '\0'; m++)
 	{
-		if (format_string[i] != '%')
+		if (format[m] != '%')
 		{
-			output[output_index++] = format_string[m];
-			if (output_index == OUTPUT_SIZE)
-				print_output(output, &output_index);
-			/* write ezz ((1, &formaat_string[i], 1));*/
-			total_printed_chars++;
+			buffer[buff_ind++] = format[i];
+			if (buff_ind == BUFF_SIZE)
+				print_buffer(buffer, &buff_ind);
+			/* jhfs write(1, &format[m], 1);sfsdf*/
+			printed_chars++;
 		}
 		else
 		{
-			print_output(output, &output_index);
-			flags = get_flags(format_string, &m);
-			width = get_width(format_string, &m, arg_list);
-			precision = get_precision(format_string, &m, arg_list);
-			size = get_size(format_string, &m);
+			print_buffer(buffer, &buff_ind);
+			flags = get_flags(format, &i);
+			width = get_width(format, &i, list);
+			precision = get_precision(format, &m, list);
+			size = get_size(format, &m);
 			++m;
-			printed_count = handle_print(format_string, &m, arg_list, output,
+			printed = handle_print(format, &m, list, buffer,
 				flags, width, precision, size);
-			if (printed_count == -1)
+			if (printed == -1)
 				return (-1);
-			total_printed_chars += printed_count;
+			printed_chars += printed;
 		}
 	}
 
-	print_output(output, &output_index);
+	print_buffer(buffer, &buff_ind);
 
-	va_end(arg_list);
+	va_end(list);
 
-	return (total_printed_chars);
+	return (printed_chars);
 }
 
 /**
- * print_output - Printss the contents of the output buffer if it exists
- * @output: Array ccharacters
- * @output_index: Index add the next character, representing the length.
+ * print_buffer – PRNT the existed buffer
+ * @buffer: chars arryaas
+ * @buff_ind: Index representing the length.
  */
-void print_output(char output[], int *output_index)
+void print_buffer(char buffer[], int *buff_ind)
 {
-	if (*output_index > 0)
-		write(1, &output[0], *output_index);
+	if (*buff_ind > 0)
+		write(1, &buffer[0], *buff_ind);
 
-	*output_index = 0;
+	*buff_ind = 0;
 }
 
