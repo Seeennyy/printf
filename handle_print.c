@@ -1,20 +1,20 @@
 #include "main.h"
 /**
- * handle_print – arg based type
- * @fmt: Formatted string in which to print the arguments.
- * @list: arg lists
- * @ind: index
- * @buffer: handled buffer to be printed.
- * @flags: outcalc flags
- * @width: mr width.
- * @precision: specification pre
+ * handle_print - Printed argument 
+ * @list: printed arg.
+ * @fmt: Formattted string
+ * @ind: index.
+ * @flags: flags
+ * @buffer: Buffer.
+ * @width: width.
  * @size: Size of specifier
- * Return: 1 or 2;
+ * @precision: Precision of specification
+ * Return: 2 or 1;
  */
 int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int m, unknow_len = 0, printed_chars = -1;
+	int i, unknow_len = 0, printed_chars = -1;
 	fmt_t fmt_types[] = {
 		{'c', print_char}, {'s', print_string}, {'%', print_percent},
 		{'i', print_int}, {'d', print_int}, {'b', print_binary},
@@ -22,11 +22,11 @@ int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
 		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_non_printable},
 		{'r', print_reverse}, {'R', print_rot13string}, {'\0', NULL}
 	};
-	for (m = 0; fmt_types[m].fmt != '\0'; m++)
-		if (fmt[*ind] == fmt_types[m].fmt)
-			return (fmt_types[m].fn(list, buffer, flags, width, precision, size));
+	for (i = 0; fmt_types[i].fmt != '\0'; i++)
+		if (fmt[*ind] == fmt_types[i].fmt)
+			return (fmt_types[i].fn(list, buffer, flags, width, precision, size));
 
-	if (fmt_types[m].fmt == '\0')
+	if (fmt_types[i].fmt == '\0')
 	{
 		if (fmt[*ind] == '\0')
 			return (-1);

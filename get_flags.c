@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * get_flags – out calc flags
- * @format: string to print arg
- * @i: parameter to be taken.
- * Return: Flagss:
+ * get_flags - flags
+ * @format: Formattted string
+ * @i: a parameter.
+ * Return: Flags:
  */
 int get_flags(const char *format, int *i)
 {

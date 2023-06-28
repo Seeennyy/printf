@@ -1,27 +1,26 @@
-
 #include "main.h"
 
 /**
- * get_size – size of cast
- * @format: str to print arg
- * @i: arg to be printed
+ * get_size - size to cast the arg
+ * @format: Formattted string 
+ * @i: printed arg
  *
- * Return: Precision.
+ * Return: Precision not acc.
  */
 int get_size(const char *format, int *i)
 {
-	int curr_m = *m + 1;
+	int curr_i = *i + 1;
 	int size = 0;
 
-	if (format[curr_m] == 'l')
+	if (format[curr_i] == 'l')
 		size = S_LONG;
-	else if (format[curr_m] == 'h')
+	else if (format[curr_i] == 'h')
 		size = S_SHORT;
 
 	if (size == 0)
-		*m = curr_m - 1;
+		*i = curr_i - 1;
 	else
-		*m = curr_m;
+		*i = curr_i;
 
 	return (size);
 }
